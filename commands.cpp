@@ -1,4 +1,5 @@
 #include "commands.h"
+#include "storage.h"
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -6,19 +7,36 @@
 
 using namespace std;
 
-void parse_insert(vector<string> tokens)
+void parse_insert(const vector<string>& tokens)
 {
-    cout << "INSERT command received\n";
+    if(tokens.size() !=3){
+        cout << "FORMAT: INSERT <key> <value>";
+        return;
+    }
+
+    const string& key = tokens[1];
+    const string& value = tokens[2];
+    if(storage_insert(key,value))
+        cout <<"INSERT: OK" << "\n";
+    
+    else
+        cout << "ACTION: FAILED\n";
+
+
 }
 
-void parse_delete(vector<string> tokens)
-{
-    cout << "DELETE command received\n";
-}
 
-void parse_find(vector<string> tokens)
-{
-    cout << "FIND command received\n";
+void parse_find(vector<string> tokens){
+    if(tokens.size() != 2){
+        cout << "FORMAT: FIND <key>\n";
+        return;
+    }
+
+    string value;
+    if(storage_select(tokens[1],value))
+        cout << value <<"\n";
+    else
+        cout << "ACTION: KEY NOT FOUND\n";
 }
 
 
@@ -58,8 +76,6 @@ void parse(string line)
 
     if(cmd == "INSERT")
         parse_insert(tokens);
-    else if(cmd == "DELETE")
-        parse_delete(tokens);
     else if(cmd == "FIND")
         parse_find(tokens);
     else if(cmd == "EXIT")
