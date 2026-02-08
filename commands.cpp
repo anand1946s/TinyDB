@@ -6,11 +6,12 @@
 #include <string>
 
 using namespace std;
+int flush_count = 0;
 
 void parse_insert(const vector<string>& tokens)
 {
     if(tokens.size() !=3){
-        cout << "FORMAT: INSERT <key> <value>";
+        cout << "FORMAT: INSERT <key> <value>\n";
         return;
     }
 
@@ -78,8 +79,19 @@ void parse(string line)
         parse_insert(tokens);
     else if(cmd == "FIND")
         parse_find(tokens);
-    else if(cmd == "EXIT")
+    else if (cmd == "LIST")
+        print_all();
+    else if(cmd == "DEL")
+        storage_delete(tokens[1]);
+    else if(cmd == "UPDATE")
+        storage_update(tokens[1],tokens[2]);
+    else if(cmd == "EXIT"){
+        storage_flush();
         exit(0);
+    }
     else
         cout << "Unknown command\n";
+    flush_count++;
+    if(flush_count%5 == 0)
+        storage_flush();
 }

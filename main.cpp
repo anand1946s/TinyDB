@@ -6,6 +6,7 @@ using namespace std;
 
 int main(){
     cout <<"=== TinyDB v1 ===\n";
+    storage_load();
     while(true)
     {
         string line;
@@ -13,4 +14,5 @@ int main(){
         getline(cin, line);
         parse(line);
     }
+    
 }
