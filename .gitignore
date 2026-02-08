@@ -1,0 +1,73 @@
+# =========================
+# Build artifacts
+# =========================
+*.o
+*.obj
+*.out
+*.exe
+*.app
+
+# CMake / Make build dirs
+build/
+cmake-build-*/
+Makefile
+CMakeCache.txt
+CMakeFiles/
+
+# =========================
+# Binary database files
+# =========================
+*.bin
+*.db
+*.dat
+*.wal
+*.log
+
+# =========================
+# Temporary & runtime files
+# =========================
+*.tmp
+*.swap
+*.swp
+*.lock
+*.pid
+
+# =========================
+# Terminal / TUI junk
+# =========================
+*.screen
+*.tmux
+*.history
+
+# =========================
+# Debugging & profiling
+# =========================
+*.dSYM/
+*.stackdump
+vgcore.*
+gmon.out
+
+# =========================
+# Editor & IDE crap
+# =========================
+.vscode/
+.idea/
+*.code-workspace
+
+# Vim
+*.vim
+*.vimrc
+
+# =========================
+# OS-specific trash
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Coverage / test outputs
+# =========================
+*.gcda
+*.gcno
+*.gcov
+coverage/
